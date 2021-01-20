@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+  }
+  
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*
+====================
+Popup panel styling
+====================
+*/
+
+.custom-dialog-container .mat-dialog-container {
+  transition: background-color 500ms linear;
+  background-color: lightslategray;
+  color: white;
+}
+
+.custom-dialog-container-dark .mat-dialog-container {
+  transition: background-color 500ms linear;
+  background-color: #711B16;
+  color: white;
+}

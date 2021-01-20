@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+
+<div style="display:flex">
+  <section *ngFor="let test of dishes_object">
+    <section class="dish__card gradient" [ngClass]="{'dish__card-dark': darkMode}">
+      <span class="dish-name__text">{{ test.title }}</span>
+      <div class="dish-icon__container" [ngSwitch]="true">
+        <img src={{test.image}} style="height:10rem; margin-top:-1%; position:absolute;">
+      </div>
+      <div class="bereidingstijd__container" [ngClass]="{'bereidingstijd__container-dark': darkMode}">
+        <span class="bereidingstijd__text">Preparation time</span>
+        <br>
+        <img src="../../assets/knife.png" height="35px" style="margin-top: 10px;">
+        <span class="bereidingstijd__value">{{ test.readyInMinutes }} min</span>
+      </div>
+      <div class="notables__container" [ngClass]="{'notables__container-dark': darkMode}">
+        <span class="bereidingstijd__text">Notable</span>
+        <br>
+        <br>
+        <div class="grid__notables">
+          <div class="notables__text">
+            Vegetarian:
+            <br>
+            Vegan:
+            <br>
+            Healthscore:
+            <br>
+            Price per serving:
+          </div>
+          <div class="notables__vinkjes">
+            <img src={{test.vegetarian}} style="height:1.4rem; margin-top: 0.4rem;">
+            <br>
+            <img src={{test.vegan}} style="height:1.4rem;">
+            <br>
+            <div style="margin-top: -0.3rem;"> {{test.healthscore}} </div>
+            <br>
+            <div style="margin-top: -2rem"> {{test.priceperserving}} </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="categorie__ennogwat">
+        <button class="cat__container" [ngClass]="{'cat__container-dark': darkMode}" (click)="openDialog(test)">
+          View ingredients and recipe
+        </button>
+      </div>
+    </section>
+  </section>
+</div>

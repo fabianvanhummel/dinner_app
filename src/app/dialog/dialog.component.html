@@ -1,0 +1,14 @@
+<div class="ingredients__title">
+    Ingredients & recipe
+</div>
+
+<section *ngFor="let data_entry of data">
+    <div class="amount__list">
+        - {{ data_entry.original }}
+        {{ data_entry.step }}
+    </div>
+</section>
+
+<div class="close_button">
+    <button class="mat-raised-button" (click)="close()">Close</button>
+</div>

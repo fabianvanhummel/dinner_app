@@ -1,0 +1,160 @@
+/*
+====================
+Dish Card Styling
+====================
+*/
+.dish__card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 1fr 3fr;
+    box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1);
+    justify-items: center;
+    padding: 2rem;
+    margin: 2rem;
+    width: 29rem;
+    height: 45rem;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 1.75rem;
+    transition: background-color 1000ms linear;
+    animation: 1.25s ease-in-out 0ms 1 fadein;
+  }
+  
+  .dish__card-dark {
+    background: linear-gradient(to bottom, #711B86, #00057A);
+    color: white;
+  }
+  
+  .dish-name__text {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .bereidingstijd__container {
+    text-align: center;
+    margin-top: 5%;
+    background-color: #99ccff;
+    width:25rem;
+    padding: 1rem;
+    border-radius: 1.75rem;
+    animation: 1.25s ease-in-out 0ms 1 fadein;
+    transition: background-color 500ms linear;
+  }
+
+  .bereidingstijd__container-dark {
+    background-color: #711B86;
+    transition: background-color 500ms linear;
+  }
+
+  .notables__container {
+    text-align: center;
+    margin-top: 0.5rem;
+    background-color: #99ccff;
+    padding: 1rem;
+    width:25rem;
+    border-radius: 1.75rem;
+    animation: 1.25s ease-in-out 0ms 1 fadein;
+    transition: background-color 500ms linear;
+  }
+
+  .notables__container-dark {
+    background-color: #711B86;
+    transition: background-color 500ms linear;
+  }
+
+  .grid__notables {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .notables__text {
+    text-align: right;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    margin-top: -0.5rem;
+    line-height: 2rem;
+  }
+
+  .notables__vinkjes {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    margin-top: -0.65rem;
+    line-height: 2rem;
+    margin-left: 1rem;
+  }
+
+  .bereidingstijd__text {
+    font-size: 30px;
+    align-items: center;
+    position: relative;
+    margin-top: 1rem;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  .bereidingstijd__value {
+    font-size: 25px;
+    position: relative;
+    bottom: 7px;
+    left:5px;
+  }
+
+  .categorie__ennogwat {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-top: 0.5rem;
+    width: 25rem;  
+  }
+
+
+ .cat__container {
+    width:75%;
+    background-color: #99ccff;
+    padding: 1rem;
+    border-radius: 1.75rem;
+    animation: 1.25s ease-in-out 0ms 1 fadein;
+    transition: background-color 500ms linear;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1rem;
+    text-align: center;  
+    color: white;
+    margin-left: 12.5%
+  }
+
+  .cat__container-dark {
+    background-color: #711B86;
+    transition: background-color 500ms linear;
+  }
+ 
+  .dish-icon__container {
+    width: 10rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .cat__text {
+    font-size: 20px;
+  }
+
+  .cat__value {
+    font-size: 15px;
+  }
+
+  .nogwat__text {
+    font-size: 20px;
+  }
+
+  .nogwat__value {
+    font-size: 15px;
+  }
+

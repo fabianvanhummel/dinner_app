@@ -1,0 +1,23 @@
+
+.close_button {
+    margin-left: 28rem;
+    top: 1rem;
+    position: absolute;
+}
+
+.ingredients__title{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+}
+
+.amount__list {
+    margin-top: 1rem;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    margin-left:1rem;
+    line-height: 2rem;
+}

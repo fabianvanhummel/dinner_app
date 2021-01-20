@@ -1,0 +1,7 @@
+/*Home Layout*/
+.main__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    grid-auto-flow: row;
+ }
