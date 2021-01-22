@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UiService } from './ui.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { HttpClient } from '@angular/common/http';
 import { DishesService } from './dishes.service'
+import { Subscription } from 'rxjs';
 
 export interface Tag {
   name: string;
@@ -15,10 +16,12 @@ export interface Tag {
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   showMenu = false;
   darkModeActive: any;
   today: number = Date.now();
+
+  subscriptions: Subscription = new Subscription();
 
   visible = true;
   selectable = true;
@@ -58,12 +61,15 @@ export class AppComponent implements OnInit {
   constructor(public ui: UiService,
     public dishesService: DishesService) { }
 
+    // Zet alle class variables boven in, is makkelijker om te lezen
     sharedDishes: any = ''
 
+  // Je hoeft eigenlijk geen public erbij te zetten. Dit is de default namelijk https://www.typescriptlang.org/docs/handbook/classes.html
   public getAPIdata() {
     this.sharedDishes = this.dishesService.sendGetRequest(this.tags).subscribe((dishes: any) => {
       this.dishes = dishes
       console.log('werkt dit binnen de subscribe?')
+      // Binnen de subscribe kan je alle kanten op. Het observable gedeelte is dan voorbij en je krijgt de data om mee te spelen in de class.
       console.log(dishes)
       this.dishesService.publishDishes(dishes);
     })
@@ -73,9 +79,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ui.darkModeState.subscribe((value: any) => {
-      this.darkModeActive = value;
-    });
+    // Dit is een warning sign dat je een memory leak krijgt. Standaard zal de browser namelijk niet het geheugen vrijmaken van deze subscribe, ook als het component is
+    //destroyed. Ik heb dit opgelost in dit component voor je door een onDestory cycle toe te voegen en daar deze observable aan toe te voegen.
+    this.subscriptions.add(
+        this.ui.darkModeState.subscribe((value: any) => {
+          this.darkModeActive = value;
+        })
+    );
   }
 
   toggleMenu() {
@@ -84,6 +94,10 @@ export class AppComponent implements OnInit {
 
   modeToggleSwitch() {
     this.ui.darkModeState.next(!this.darkModeActive);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
 }

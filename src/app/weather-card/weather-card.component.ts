@@ -5,6 +5,14 @@ import { UiService } from '../ui.service';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DialogComponent } from '../dialog/dialog.component'
 
+// export interface WeatherDish {
+//   index: number;
+//   title: string;
+//   readyInMinutes: number;
+//   image: string;
+//   ...
+// }
+
 @Component({
   selector: 'app-weather-card',
   templateUrl: './weather-card.component.html',
@@ -12,12 +20,17 @@ import { DialogComponent } from '../dialog/dialog.component'
 })
 
 export class WeatherCardComponent implements OnInit, OnDestroy {
+
+  // Vergeet niet dat any eigenlijk de typescript compilatie hulp uitschakelt voor deze var, ook al doe je alleen stirng, number. Het help wel iets.
+  // Dishes bijvoorbeeld moet altijd een array type zijn denk ik ? dan kan je invullen any[]; Nog beter is om zelf een interface te schrijven, zie interface boven.
+  // Dan is het WeatherDish[]. Nu weet typescript welke properties deze objecten heeft en dat dit een array moet zijn met enkel deze objecten.
   condition: any;
   currentTemp: any;
   maxTemp: any;
   minTemp: any;
   darkMode: any;
   dishes: any;
+
   dishes_object = [
     {
       index: 0,
@@ -32,10 +45,15 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
       instructions: {}
     }
   ];
+
+  // Hier kan je :number weghalen omdat Typescript al weet dat het een number is als je een 0 toekent.
   index: number = 0
+
+  // Ditto met boolean in dit geval
   opened: boolean = false
   darkstyling: string = ''
   dataset: any = ''
+  // Als je any hier weghaalt, dan weet typescript dat localSharedDishes een strng is. Omdat je de waarde van '' initieert.
   localSharedDishes: any = ''
 
   constructor(public dishesService: DishesService,
@@ -69,8 +87,21 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
       
       console.log('initiated dataset to iterate over')
 
+        // Deze kan je weghalen als je onderin kiest voor een andere forLoop zoals:
       var i;
 
+
+        // Dit is een voorbeeld van een alternatieve frl
+        // for (const dish of Object.keys(this.dataset)) {
+        //
+        // }
+
+        // Of deze:
+        // Object.keys(this.dataset).forEach(dish => {
+        //
+        // })
+
+         // Deze kan korter danzij ES6
       for (i = 0; i < Object.keys(this.dataset).length; i++) {
 
         let veggie = ''
@@ -97,6 +128,7 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
             break;
         }
 
+        // Omdat er veel gebeurd in deze forLoop zou ik alle handelingen in een aparte functie neerzetten. Dan is het makkelijker te debuggen en testen in de unittest spec files
         this.dishes_object[i] = {
           index: i,
           title: this.dataset[i]['title'],
@@ -199,14 +231,19 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
     dialogConfig.height = '49rem';
     dialogConfig.data = input['ingredients'];
 
-    switch (this.darkMode) {
-      case true:
-        this.darkstyling = 'custom-dialog-container-dark'
-        break;
-      case false:
-        this.darkstyling = 'custom-dialog-container'
-        break;
-    }
+    // Met maar twee keuzes is een switch case een beetje overkill: bijvoorbeeld als dit:
+     this.darkstyling = this.darkMode ?
+        'custom-dialog-container-dark' :
+        'custom-dialog-container';
+
+    // switch (this.darkMode) {
+    //   case true:
+    //     this.darkstyling = 'custom-dialog-container-dark'
+    //     break;
+    //   case false:
+    //     this.darkstyling = 'custom-dialog-container'
+    //     break;
+    // }
 
     switch (index) {
       case 0:
@@ -251,6 +288,7 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
     dialogConfig.data = input['instructions'];
     console.log(input['instructions'])
 
+    // Deze logica zie ik voor de tweede keer, weet je een manier om dit maar 1x te schrijven en dan te hergebruiken?
     switch (this.darkMode) {
       case true:
         this.darkstyling = 'custom-dialog-container-dark'
@@ -291,6 +329,7 @@ export class WeatherCardComponent implements OnInit, OnDestroy {
 
   }
 
+  // Deze is leeg :)
   ngOnDestroy() {
 
   }

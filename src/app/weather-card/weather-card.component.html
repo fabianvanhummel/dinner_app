@@ -1,3 +1,6 @@
+<!--
+Zet deze in de index.html neer of nog beter, importeer het bestand als global CSS in angular.json of de SCSS
+-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 
 <div style="display:flex">
@@ -5,12 +8,20 @@
     <section class="dish__card gradient" [ngClass]="{'dish__card-dark': darkMode}">
       <span class="dish-name__text">{{ test.title }}</span>
       <div class="dish-icon__container" [ngSwitch]="true">
+
+        <!-- Als je blok haken om de attr naam zet dan wordt het als JS variable verwerkt, zie regel onder. Staat beter imo -->
         <img src={{test.image}} style="height:10rem; margin-top:-1%; position:absolute;">
+<!--        <img [src]="test.image" style="height:10rem; margin-top:-1%; position:absolute;">-->
+
       </div>
+      <!-- Nederlandse variablee naam grr hihi -->
       <div class="bereidingstijd__container" [ngClass]="{'bereidingstijd__container-dark': darkMode}">
         <span class="bereidingstijd__text">Preparation time</span>
         <br>
+
+        <!-- Height hoort meer in de CSS thuis tenzij de height dynamisch is -->
         <img src="../../assets/knife.png" height="35px" style="margin-top: 10px;">
+        <!-- Nederlandse variablee naam grr hihi -->
         <span class="bereidingstijd__value">{{ test.readyInMinutes }} min</span>
       </div>
       <div class="notables__container" [ngClass]="{'notables__container-dark': darkMode}">
@@ -28,6 +39,8 @@
             Price per serving:
           </div>
           <div class="notables__vinkjes">
+            <!-- Omdat je met br/ de styling hebt gedaan en iconen gebruikt zal je zien in de UI dat het niet helemaal lekker uitlijnt.
+            Beter een table gebruiken met geen borders bijvoorbeeld -->
             <img src={{test.vegetarian}} style="height:1.4rem; margin-top: 0.4rem;">
             <br>
             <img src={{test.vegan}} style="height:1.4rem;">
@@ -39,6 +52,7 @@
         </div>
       </div>
 
+      <!-- NL -->
       <div class="categorie__ennogwat">
         <button class="cat__container" [ngClass]="{'cat__container-dark': darkMode}" (click)="openDialog(test)">
           View ingredients and recipe
