@@ -1,5 +1,6 @@
 <!-- Slide Menu-->
 <aside class="side-menu__container" [ngClass]="{'side-menu__container-active': showMenu}" (click)="toggleMenu()">
+    <!-- De click() met stopPropagation kan je voorkomen door de DOM elementen anders in te richten. Bijvoorbeeld door niet het klik event op de hele aside te zetten. -->
   <nav class="slide-menu" [ngClass]="{'slide-menu-active': showMenu}" (click)="$event.stopImmediatePropagation();">
       <section class="menu-header">
           <span class="greeting__text">Welcome Back</span>
@@ -10,6 +11,7 @@
             Add new tags (in English):
           </div>
             <div class="tags-form">
+                <!-- ps: deze mat-form elementen hebben we voor holonet zelf gemaakt. Geeft meer controle over het gedrag van de componenten -->
               <mat-form-field  style="width:20rem;" class="example-chip-list">
                 <mat-label>Extra tags</mat-label>
                   <mat-chip-list #chipList aria-label="Add tags to search...">
@@ -18,8 +20,8 @@
                         {{tag.name}}
                           <mat-icon matChipRemove class = "remove_x" *ngIf="removable">x</mat-icon>
                       </mat-chip>
-                    <input class = "tags-form" 
-                    
+                    <input class = "tags-form"
+
                     placeholder="New tag..."
                          [matChipInputFor]="chipList"
                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -27,11 +29,12 @@
                          (matChipInputTokenEnd)="add($event)">
                   </mat-chip-list>
               </mat-form-field>
-              
+
           </div>
           <div class="tags-text ">
             Let's get cookin'!
             <br>
+              <!-- Probeer meer dan 1x br/ te vermijden. Als er meer dan 1x regel tussen de tekst zit kan je beter gewoon een extra element introduceren met een margin-top -->
             <br>
             Press 'Cook something up'!
           </div>
@@ -39,50 +42,59 @@
             <button mat-raised-button type="button" style="width:85%;" (click)="getAPIdata()" color="warn">Let's cook something up!</button>
           </div>
         </form>
-        
+
       </section>
       <section class="menu-footer">
-        
+
       </section>
   </nav>
 </aside>
 
   <div class="root__container" >
       <header [ngClass]="{'main__header-dark': darkModeActive}" class="main__header">
-  
+
             <svg (click)="toggleMenu()" class="hamburger__icon" id="Menu_Burger_Icon">
+                <!-- Xlink is deprecated https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/xlink:href. Gewoon href is goed :) -->
                 <image width="45" height="30" xlink:href="https://cdn.onlinewebfonts.com/svg/img_264669.png"/>
             </svg>
 
           <h3 class="mode-toggle__text">
-            <span style="font-size:25px;">&#8592;</span>  
+              <!-- Probeer deze tag te vermijden. De inline style tag heeft namelijk veel nadelen tov een class in de css.
+              Maar omdat we ook niet allemaal CSS classes willen aanmaken worden er voor dit soort dingen  vaak global CSS utility classes gemaakt.
+              Bijvoorbeeld: font--small, font--medium, font--large.
+              Bijkomend voordeel: je hebt systematisch een aantal varianten van font-size gedefinieerd en voorkomt dat je allemaal out of the blue values krijgt. -->
+            <span style="font-size:25px;">&#8592;</span>
             Select diet here!
         </h3>
           <h3 class="date__text">
+              <!-- Wellicht is het je opgevallen, maar de datum is geprint in een amerikaanse annotatie (MM dd YYYY). Simpel op te lossen door een Locale in te stellen in de Angular app.-->
             {{today | date}}
+<!--              {{today | date:'dd/MM/yyyy' }} <-- of deze string meegeven om meer controle te krijgen over deze Angular pipe
+  -->
           </h3>
-    
+
           <div class="mode-toggle__container">
               <span class="mode-toggle__text">Light</span>
-  
+
               <label class="toggle-button__container">
                   <input (click)="modeToggleSwitch()" type="checkbox" class="mode-toggle__input" />
                     <span [ngClass]="{'mode-toggle__bg-checked': darkModeActive}" class="mode-toggle__bg"></span>
                     <span [ngClass]="{'mode-toggle__circle-checked': darkModeActive}" class="mode-toggle__circle"></span>
               </label>
-    
+
+              <!-- Deze class is niet goed volgens de BEM conventie. Zou mode-toggle__text-right moeten zijn als text-right het element is. En mode-toggle het block. -->
               <span class="mode-toggle__text_right">Dark</span>
           </div>
-  
+
       </header>
-  
+
       <!-- Main Content -->
-  
+            <!-- stijl ding maar via bijv prettier even deze elementen uitlijnen -->
           <div class="main-container__bg" [ngClass]="{'main-container__bg-dark': darkModeActive}"></div>
               <div class="router_container">
             <router-outlet></router-outlet>
             </div>
-        
-          
-        
+
+
+
   </div>

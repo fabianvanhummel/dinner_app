@@ -1,3 +1,26 @@
+/**
+
+  FWI: Vrijwel iedere ontwikeklaar gebruikt SCSS als styling optie in Angular. Deze heeft wat meer mogelijkheden. Zodra je de eerste story oppakt laat ik je wat dingen zien zodat
+  je niet schrikt als het er wat anders uit ziet.
+
+  Mocht je ook met scss willen werken: zet dan dit in de angular.json:
+
+  {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+...
+  "projects": {
+    "frontend": {
+      ...
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss",
+        }
+      }
+}
+
+
+ */
+
 .root__container {
     width: 100vw;
     height: 100vh;
@@ -320,5 +343,6 @@
   ================
   */
   .router_container {
+    /*een waarde van 0, kan je gewoon 0 neerzetten*/
     margin-top: 0%;
   }
