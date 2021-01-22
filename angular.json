@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "DinnerApp"
+  "defaultProject": "DinnerApp",
+  "cli": {
+    "analytics": false
+  }
 }
